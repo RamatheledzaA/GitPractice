@@ -25,7 +25,7 @@ public class LinkedList02 {
 
         // now let's link the nodes
         node1.next = node2;
-        node1.prev = node5;
+        node1.prev = node5; // circular link
 
         node2.next = node3;
         node2.prev = node1;
@@ -39,7 +39,35 @@ public class LinkedList02 {
         node5.next = node1;
         node5.prev = node4;
 
+        // let's start to display  everything in a transversing forward and backward
 
+        System.out.println(" Transversing Forward");
+        Node currentNode = node1;
+        Node startNode = node1;
+        System.out.print( currentNode.data);
+        currentNode = currentNode.next;
+
+        while( currentNode != startNode){
+            System.out.print(currentNode.data);
+            currentNode = currentNode.next;
+        }
+        System.out.println("......."); // this indicated  that it loops back
+
+        // now let's focus on the Transversing backward
+        System.out.println(" Transversing backward");
+        currentNode = node5;
+        startNode = node5;
+
+
+        System.out.print(currentNode.next);
+        currentNode = currentNode.prev;
+
+        while ( currentNode != startNode){
+            System.out.print(currentNode.next);
+            currentNode = currentNode.prev;
+        }
+        System.out.println(".......");
+        
 
     }
 }
