@@ -34,14 +34,19 @@ public class AnagramCompare {
             String key = new String(word);
 
             // if key is not in the map
-            if (!map.containsKey(key)) {
-                map.putIfAbsent(key, new ArrayList<>());
-            }
-            map.get(key).add(word);
+            if (!map.containsKey(key)){
 
+                ArrayList<String> list = new ArrayList<>();
+                list.add(word);
+                map.put(key, list);
+
+            }
+            else {
+
+                map.get(key).add(word);
+            }
         }
         sc.close();
-        
         PrintLargestGroup(map);
     }
 

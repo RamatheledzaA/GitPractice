@@ -18,10 +18,11 @@ public class AnagramHash {
             Arrays.sort(letters);
             String key = new String(letters);
 
-            if (!map.containsKey(key)) {
+            // if key is not in the map
+            if (!map.containsKey(key)){
                 map.put(key, new ArrayList<>());
+                map.get(key).add(word);
             }
-            map.get(key).add(word);
         }
         System.out.println(map);
     }
