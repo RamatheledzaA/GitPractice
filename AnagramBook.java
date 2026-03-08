@@ -9,11 +9,11 @@ import java.util.Scanner;
 
 public class AnagramBook {
     public static void main(String [] args) {
-        HashMap<String, ArrayList<String>> map = new HashMap<>();
         try {
             // read from a text file
-            File file = new File("book.txt");
+            File file = new File("C:/Users/user/IdeaProjects/My_COS211 and 212 projects/src/book.txt");
             Scanner scan = new Scanner(file);
+            HashMap<String, ArrayList<String>> map = new HashMap<>();
 
             while (scan.hasNext()) {
                 // read the next word
@@ -34,9 +34,7 @@ public class AnagramBook {
                 String key = new String(letters);
 
                 // if the key is not  in map create new list
-                if (!map.containsKey(key)) {
-                    map.put(key, new ArrayList<>());
-                }
+                map.putIfAbsent(key, new ArrayList<>());
                 map.get(key).add(word);
             }
             scan.close();
@@ -47,28 +45,9 @@ public class AnagramBook {
                 }
             }
 
-
-
         } catch (Exception e) {
             System.out.println("Error reading file");
         }
-
-        // lets work on  grouping anagrams
-        System.out.print(" Now let work on Anagrams when given a string array!");
-        String[] words= {"eat","tea","tan","ate","nat","bat","listen","silent","cat","act","dog","god" };
-        System.out.println(words);
-
-        for ( String word : words) {
-            char[] letters = word.toCharArray();
-            Arrays.sort(letters);
-            String key = new String(letters);
-
-            if (!map.containsKey(key)) {
-                map.put(key, new ArrayList<>());
-            }
-            map.get(key).add(word);
-        }
-        System.out.println(map);
 
     }
 
