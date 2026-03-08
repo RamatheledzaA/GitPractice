@@ -41,12 +41,41 @@ public class AnagramCompare {
             map.get(key).add(word);
 
         }
+        sc.close();
     }
-    
-    public static void main(String[] args)  {
-        try{
-            HashMap<String , ArrayList<String>> maps = new HashMap<>()
+
+    // -------Frequency method------
+    public static void FrequencyMethod() throws Exception{
+
+        HashMap <String,ArrayList<String>> map = new HashMap<>();
+        Scanner sc = new Scanner(new File("C:/Users/user/IdeaProjects/My_COS211 and 212 projects/src/book.txt/"));
+
+        while (sc.hasNext()){
+            String word = sc.next().toLowerCase();
+            word = word.replaceAll("[^a-z]" , ""); // removes puntuations
+
+            if ( word.length() == 0){
+                continue;
+            }
+            // lets create a frequency array
+            int[] freq = new int[26] ;// 26 indicates that total number of alphebatical letters
+
+            // now create a character array
+            for( char c : word.toCharArray()){
+                freq[c - 'a']++;
+            }
+
+            // now create a key
+            String key = Arrays.toString(freq);
+            // if the key is not in the map
+            map.putIfAbsent(key , new ArrayList<>());
+            map.get(key).add(word);
         }
+        sc.close();
+    }
+    public static void main(String[] args)  {
+
+
 
     }
 }
