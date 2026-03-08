@@ -1,9 +1,6 @@
 // Ramatheledza Adzisani 4484298
 /* Read each word from the book.
 Convert the word to lowercase.
-Sort the characters of the word.
-Use the sorted string as a key in a HashMap.
-Insert the word into the corresponding list
  */
 
 // Anagrams Using Frequency Method
@@ -29,9 +26,6 @@ public class AnagramProblem1 {
                 //remove the puncuations
                 word = word.replaceAll("[^a-z]" , "");
 
-                // create a character array and soet it
-                char [] letters = word.toCharArray();
-                Arrays.sort(letters);
 
                 if ( word.length() == 0){
                     continue;
