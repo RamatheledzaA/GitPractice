@@ -4,8 +4,9 @@ Convert the word to lowercase.
 Sort the characters of the word.
 Use the sorted string as a key in a HashMap.
 Insert the word into the corresponding list
-
  */
+
+// Anagrams Using Frequency Method
 
 import java.io.File;
 import java.io.IOException;
@@ -32,14 +33,32 @@ public class AnagramProblem1 {
                 char [] letters = word.toCharArray();
                 Arrays.sort(letters);
 
-                // create a key
-                String key = new String(letters);
+                if ( word.length() == 0){
+                    continue;
+                }
+                // create a frequency array
+                int[] frequency = new int[26];
 
+                //create a character array
+                for( char c : word.toCharArray()){
+                    frequency [ c - 'a']++;
+                }
+
+                // create a key
+                String key = Arrays.toString( frequency);
+
+                // if key is not in the map
+                map.putIfAbsent(key, new ArrayList<>());
+                map.get(key).add(word);
 
             }
-
-
-
+            sc.close();
+            // display
+            for (ArrayList<String> group : map.values()) {
+                if (group.size() > 1) {
+                    System.out.println(group);
+                }
+            }
 
         } catch (Exception e) {
             System.out.println("error when reading a file");
