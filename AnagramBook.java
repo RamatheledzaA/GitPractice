@@ -1,6 +1,11 @@
 // ramatheledza adzisani 4484298
 // Write a Java program that reads words from a file and array(array) and groups anagrams.
-
+//Write a Java program that reads words from a file called book.txt and groups all anagrams together.
+/* The program must:
+     Ignore punctuation.
+     Ignore uppercase/lowercase differences.
+     Print only groups that contain more than one word.
+ */
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
