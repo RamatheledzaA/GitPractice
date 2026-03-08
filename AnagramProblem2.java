@@ -42,20 +42,36 @@ public class AnagramProblem2 {
                 map.putIfAbsent(key , new ArrayList<>());
                 map.get(key).add(word);
 
-                // let's group the anagrams and find the largest group
-                for ( ArrayList<String> group : map.values()){
-                    if (group.size() > 1){
-                        System.out.println(group);
-                    }
-                    for (int i = 0 ; i < group.size() ; i++){
-                        group[i];
-                        if(group[i])
+            }
+            sc.close();
+            // let's group the anagrams and find the largest group
+            ArrayList<String> LargestGroup = new ArrayList<>();
+            ArrayList<String> SmallestGroup = new ArrayList<>();
 
-                    }
+            System.out.println("-----------Grouped Anagrams----------------");
+            for ( ArrayList<String> group : map.values()) {
+                if (group.size() > 1) {
+                    System.out.println(group);
                 }
-
+                if(group.size() > LargestGroup.size()){
+                    LargestGroup = group;
+                }else{
+                    SmallestGroup= group;
+                }
             }
 
+            System.out.println("----------------------------------------------------");
+            // PRINT THE LARGEST GROUP
+            System.out.println("Largest anagram group:");
+            System.out.println(LargestGroup);
+            System.out.println("Size = " + LargestGroup.size());
+
+            System.out.println("----------------------------------------------------");
+
+            // PRINT THE SMALLEST GROUP
+            System.out.println("The smallest anagram group:");
+            System.out.println(SmallestGroup);
+            System.out.println("Size :" + SmallestGroup.size());
 
         } catch (Exception e) {
             System.out.println(" error reading file");
