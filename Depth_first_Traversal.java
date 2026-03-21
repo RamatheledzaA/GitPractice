@@ -21,7 +21,6 @@ public class Depth_first_Traversal {
             return;
         }
 
-        System.out.println("-------Pre Order Traversal------");
         System.out.print ( node.data + " ");
         preOrderTraversal(node.left);
         preOrderTraversal(node.right);
@@ -33,19 +32,18 @@ public class Depth_first_Traversal {
             return;
         }
 
-        System.out.println("-------In Order Traversal------");
         preOrderTraversal(node.left);
         System.out.print ( node.data + " ");
         preOrderTraversal(node.right);
     }
 
     // --- Post order Traversal -------
+
     public static void postOrderTraversal(TreeNode node){
         if ( node == null){
             return;
         }
 
-        System.out.println("-------Post Order Traversal------");
         preOrderTraversal(node.left);
         preOrderTraversal(node.right);
         System.out.print ( node.data + " ");
@@ -74,8 +72,17 @@ public class Depth_first_Traversal {
         node5.left = node7;
 
         // traverse
+        System.out.println("-------Pre Order Traversal------");
         preOrderTraversal(root);
+
+        System.out.print("\n");
+
+        System.out.println("-------In Order Traversal------");
         inOrderTraversal(root);
+
+        System.out.print("\n");
+        
+        System.out.println("-------Post Order Traversal------");
         postOrderTraversal(root);
 
 
