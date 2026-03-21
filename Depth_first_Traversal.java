@@ -15,5 +15,20 @@ public class Depth_first_Traversal {
 
         }
     }
+    // lets word on the pre order traversal
+    public static void preOrderTraversal(TreeNode node){
+        if ( node == null){
+            return;
+        }
+
+        System.out.println("-------Pre Order Traversal------");
+        System.out.print ( node.data + " ");
+        preOrderTraversal(node.left);
+        preOrderTraversal(node.right);
+    }
+
+    // -----In order Traversal------
+    
+
 
 }
