@@ -40,6 +40,46 @@ public class Depth_first_Traversal {
     }
 
     // --- Post order Traversal -------
+    public static void postOrderTraversal(TreeNode node){
+        if ( node == null){
+            return;
+        }
+
+        System.out.println("-------Post Order Traversal------");
+        preOrderTraversal(node.left);
+        preOrderTraversal(node.right);
+        System.out.print ( node.data + " ");
+    }
+
+    public static void main(String [] args){
+        TreeNode root = new TreeNode("R");
+        TreeNode node1 = new TreeNode("A");
+        TreeNode node2 = new TreeNode("B");
+        TreeNode node3 = new TreeNode("C");
+        TreeNode node4 = new TreeNode("D");
+        TreeNode node5 = new TreeNode("E");
+        TreeNode node6= new TreeNode("F");
+        TreeNode node7 = new TreeNode("G");
+
+        // arrange the node and root
+        root.left = node1;
+        root.right = node2;
+
+        node1.left = node3;
+        node2.right = node4;
+
+        node3.left = node5;
+        node4.right= node6;
+
+        node5.left = node7;
+
+        // traverse
+        preOrderTraversal(root);
+        inOrderTraversal(root);
+        postOrderTraversal(root);
+
+
+    }
 
 
 }
