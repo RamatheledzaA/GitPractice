@@ -28,7 +28,18 @@ public class Depth_first_Traversal {
     }
 
     // -----In order Traversal------
-    
+    public static void inOrderTraversal(TreeNode node){
+        if ( node == null){
+            return;
+        }
+
+        System.out.println("-------In Order Traversal------");
+        preOrderTraversal(node.left);
+        System.out.print ( node.data + " ");
+        preOrderTraversal(node.right);
+    }
+
+    // --- Post order Traversal -------
 
 
 }
