@@ -96,7 +96,7 @@ public class Depth_first_Traversal {
         System.out.print("\n");
 
         System.out.println( "Count of nodes : "+ countNodes(root));
-        
+
 
 
     }
