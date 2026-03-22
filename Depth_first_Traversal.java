@@ -50,7 +50,12 @@ public class Depth_first_Traversal {
     }
 
     // count nodes
-    
+    public static int countNodes (TreeNode node){
+        if (node == null)
+            return 0 ;
+
+        return 1 + countNodes(node.left) + countNodes(node.right);
+    }
 
     public static void main(String [] args){
         TreeNode root = new TreeNode("R");
@@ -87,6 +92,11 @@ public class Depth_first_Traversal {
 
         System.out.println("-------Post Order Traversal------");
         postOrderTraversal(root);
+
+        System.out.print("\n");
+
+        System.out.println( "Count of nodes : "+ countNodes(root));
+        
 
 
     }
