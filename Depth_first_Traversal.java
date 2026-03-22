@@ -1,14 +1,16 @@
 import javax.swing.tree.TreeNode;
-
+import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Queue;
 // Ramatheledza Adzisai 4484298
 public class Depth_first_Traversal {
 
     // let's create a treeNode class
     public static class TreeNode{
-        String data;
+        int data;
         TreeNode left;
         TreeNode right;
-        public TreeNode (String data){
+        public TreeNode (int data){
             this.data= data;
             this.left = null;
             this.right =  null;
@@ -49,23 +51,35 @@ public class Depth_first_Traversal {
         System.out.print ( node.data + " ");
     }
 
-    // count nodes
-    public static int countNodes (TreeNode node){
-        if (node == null)
-            return 0 ;
+// level order traversal
+    public static void levelOrder(TreeNode node){
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(node);
 
-        return 1 + countNodes(node.left) + countNodes(node.right);
+        while(!q.isEmpty()) {
+            TreeNode current = q.poll();
+            System.out.print(current.data + " ");
+
+            if (current.left != null){
+                q.add(current.left);
+            }
+            if (current.right != null){
+                q.add(current.right);
+            }
+
+        }
     }
 
+
     public static void main(String [] args){
-        TreeNode root = new TreeNode("R");
-        TreeNode node1 = new TreeNode("A");
-        TreeNode node2 = new TreeNode("B");
-        TreeNode node3 = new TreeNode("C");
-        TreeNode node4 = new TreeNode("D");
-        TreeNode node5 = new TreeNode("E");
-        TreeNode node6= new TreeNode("F");
-        TreeNode node7 = new TreeNode("G");
+        TreeNode root = new TreeNode(1);
+        TreeNode node1 = new TreeNode(2);
+        TreeNode node2 = new TreeNode(3);
+        TreeNode node3 = new TreeNode(4);
+        TreeNode node4 = new TreeNode(5);
+        TreeNode node5 = new TreeNode(6);
+        TreeNode node6= new TreeNode(7);
+        TreeNode node7 = new TreeNode(8);
 
         // arrange the node and root
         root.left = node1;
@@ -95,7 +109,7 @@ public class Depth_first_Traversal {
 
         System.out.print("\n");
 
-        System.out.println( "Count of nodes : "+ countNodes(root));
+        //System.out.println( "level order traversal: " + levelOrder());
 
 
 
