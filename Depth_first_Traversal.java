@@ -49,6 +49,9 @@ public class Depth_first_Traversal {
         System.out.print ( node.data + " ");
     }
 
+    // count nodes
+    
+
     public static void main(String [] args){
         TreeNode root = new TreeNode("R");
         TreeNode node1 = new TreeNode("A");
@@ -81,7 +84,7 @@ public class Depth_first_Traversal {
         inOrderTraversal(root);
 
         System.out.print("\n");
-        
+
         System.out.println("-------Post Order Traversal------");
         postOrderTraversal(root);
 
