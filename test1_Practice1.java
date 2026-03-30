@@ -28,7 +28,7 @@ public class test1_Practice1 {
     int left = 0;
     int right = binary_array.length - 1;
 
-    while( left  <= right  ){
+    /*while( left  <= right  ){
         int mid = ( left + right)/ 2 ;
         if ( mid == target){
 
@@ -50,7 +50,9 @@ public class test1_Practice1 {
         }
         return -1;
     }
-
+*/
 
 
 }
+
+
