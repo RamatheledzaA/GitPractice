@@ -55,4 +55,20 @@ class Stack {
 }
 
 public class StacksArrays {
+    public static void main( String [] args){
+
+        Stack myStack = new Stack(10);
+        myStack.push('a');
+        myStack.push('d');
+        myStack.push('p');
+        myStack.push('m');
+        myStack.push('k');
+
+        System.out.print("Stacks:  ") ;
+        System.out.println();
+        System.out.println("Pop :" + myStack.pop());
+        System.out.println("Peek :" + myStack.peek());
+        System.out.println("isEmpty :" + myStack.isEmpty());
+        System.out.println("Size :" + myStack.size());
+    }
 }
