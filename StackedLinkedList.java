@@ -9,10 +9,10 @@ class Node{
 }
 
 // create a stack class
-class Stack {
+class Stack1 {
     private Node head ;
     private int size;
-    public Stack(){
+    public Stack1(int i){
         this.head = null;
         this.size = 0;
 
@@ -29,14 +29,29 @@ class Stack {
     // create a pop method that detetes or remoe a node from stack and return the top element
     public char pop(){
         if( isEmpty ()){
-            return '' ;
+            return 0;
         }
-        char poppped = head.value;
+        char popped = head.value;
         head = head.next;
         size--;
         return popped;
     }
-    //
+    //create a peek method that returns the top value
+    public char peek(){
+        if( isEmpty ()){
+            return 0 ;
+        }
+        return head.value;
+    }
+
+    // create the isEmpty method
+    public boolean isEmpty(){
+        return size == 0 ;
+    }
+    // create a size method
+    public int size(){
+        return size;
+    }
 }
 
 
