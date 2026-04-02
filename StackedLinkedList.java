@@ -54,8 +54,6 @@ class Stack1 {
     }
 }
 
-
-
 public class StackedLinkedList {
     public static void main( String [] args){
 
