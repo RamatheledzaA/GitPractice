@@ -9,6 +9,41 @@ public class BinaryTree {
             left= right = null ;
         }
     }
+// create a pre order method for a tree and print
+    public static void printPreOrder (BinaryNode node){
+        if(node == null){
+            return;
+        }
+
+        System.out.print(node.data + " , ");
+        printPreOrder(node.left);
+        printPreOrder(node.right);
+    }
+
+    // in order method and print
+    public static void printInOrder (BinaryNode node){
+        if(node == null){
+            return;
+        }
+        printInOrder(node.left);
+        System.out.print(node.data + " , ");
+        printInOrder(node.right);
+    }
+
+    // post order method and print
+    public static void printPostOrder (BinaryNode node){
+        if(node == null){
+            return;
+        }
+        printInOrder(node.left);
+        printInOrder(node.right);
+        System.out.print(node.data + " , ");
+    }
+
+    // create a methode that counts the number of node in the tree
+
+
+
     // the main method
     public static void main(String [] args){
         BinaryNode root = new BinaryNode(11);
@@ -36,6 +71,17 @@ public class BinaryTree {
         node3.right = node8 ;
 
         node4.left = node9;
+
+        // display all the output
+        System.out.println("----Pre Order------");
+        printPreOrder(root);
+        System.out.print("\n");
+        System.out.println("----In Order------");
+        printInOrder(root);
+        System.out.print("\n");
+        System.out.println("----Post Order------");
+        printPostOrder(root);
+
 
     }
 }
