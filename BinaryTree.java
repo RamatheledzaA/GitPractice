@@ -4,17 +4,19 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BinaryTree {
-    public static class BinaryNode{
+    public static class BinaryNode {
         int data;
         BinaryNode left, right;
-        public BinaryNode( int data){
+
+        public BinaryNode(int data) {
             this.data = data;
-            left= right = null ;
+            left = right = null;
         }
     }
-// create a pre order method for a tree and print
-    public static void printPreOrder (BinaryNode node){
-        if(node == null){
+
+    // create a pre order method for a tree and print
+    public static void printPreOrder(BinaryNode node) {
+        if (node == null) {
             return;
         }
 
@@ -24,8 +26,8 @@ public class BinaryTree {
     }
 
     // in order method and print
-    public static void printInOrder (BinaryNode node){
-        if(node == null){
+    public static void printInOrder(BinaryNode node) {
+        if (node == null) {
             return;
         }
         printInOrder(node.left);
@@ -34,57 +36,55 @@ public class BinaryTree {
     }
 
     // post order method and print
-    public static void printPostOrder (BinaryNode node){
-        if(node == null){
+    public static void printPostOrder(BinaryNode node) {
+        if (node == null) {
             return;
         }
-        printInOrder(node.left);
-        printInOrder(node.right);
+        printPostOrder(node.left);
+        printPostOrder(node.right);
         System.out.print(node.data + " , ");
     }
 
     // method that display level by level
-    public static void LevelByLevel ( BinaryNode node) {
-        if ( node == null) {
+    public static void LevelByLevel(BinaryNode node) {
+        if (node == null) {
             return;
         }
         Queue<BinaryNode> tree = new LinkedList<>();
         tree.add(node);
 
-        while (!tree.isEmpty()){
+        while (!tree.isEmpty()) {
             BinaryNode current = tree.poll();
             System.out.print(current.data + " ");
 
-            if (current.left == null){
+            if (current.left != null) {
                 tree.add(current.left);
             }
-            if (current.right == null){
+            if (current.right != null) {
                 tree.add(current.right);
             }
         }
 
     }
 
-
     // create a method that counts the number of node in the tree
-    public static int CountNodes(BinaryNode node){
-        if(node == null){
-            return 1 + CountNodes(node.left) + CountNodes(node.right);
+    public static int CountNodes(BinaryNode node) {
+        if (node == null) {
+            return 0;
         }
-
-
-        return 0;
+        return 1 + CountNodes(node.left) + CountNodes(node.right);
     }
+
     // fing the height of the tree
-    public static int Height(BinaryNode node){
-        if (node == null){
-
-            int leftHeight = Height(node.left);
-            int rightHeight= Height(node.right);
-
-            return 1 + Math.max(leftHeight , rightHeight);
+    public static int Height(BinaryNode node) {
+        if (node == null) {
+            return 0;
         }
-        return 0;
+        int leftHeight = Height(node.left);
+        int rightHeight = Height(node.right);
+
+        return 1 + Math.max(leftHeight, rightHeight);
+
     }
 
 
@@ -101,44 +101,58 @@ public class BinaryTree {
 
 
     // a amethod that returns true or false if a value exits
-    static boolean ValueExist(BinaryNode node, int key){
-        if ( node == null){
+    static boolean ValueExist(BinaryNode node, int key) {
+        if (node == null) {
             return false;
         }
-        if (node.data == key){
+        if (node.data == key) {
             return true;
         }
-        return ValueExist(node.left , key) || ValueExist(node.right , key);
+        return ValueExist(node.left, key) || ValueExist(node.right, key);
     }
 
     // method that sum the values in the tree
-    public static int sumValues (BinaryNode node){
+    public static int sumValues(BinaryNode node) {
 
-        if ( node == null){
-            int leftChild = sumValues(node.left);
-            int rightChild = sumValues(node.right);
-            int sum = leftChild + rightChild;
-            return node.data +  sum;
+        if (node == null) {
+            return 0;
+        }
+        int leftChild = sumValues(node.left);
+        int rightChild = sumValues(node.right);
+        int sum = leftChild + rightChild;
+        return node.data + sum;
     }
 
     // create a method that swaps the values and print
-    void swapValues (BinaryNode node){
-        if ( node == null){
-            return;
+    public static BinaryNode swapValues(BinaryNode node) {
+        if (node == null) {
+            return null;
         }
 
         BinaryNode temp = node.left;
         node.left = node.right;
-        node.right = temp ;
+        node.right = temp;
 
         swapValues(node.left);
         swapValues(node.right);
         return node;
     }
 
+    // check if the tree is balanced
+    public static boolean isBalanced(BinaryNode node){
+        if (node == null){
+            return true;
+        }
 
+        int leftHeight = Height(node.left);
+        int rightHeight = Height(node.right);
 
+        if (Math.abs(leftHeight - rightHeight) > 1){
+            return false;
+        }
 
+        return isBalanced(node.left) && isBalanced(node.right);
+    }
 
     // the main method
     public static void main(String [] args){
@@ -184,12 +198,13 @@ public class BinaryTree {
         System.out.println( "Number of nodes in the tree : " + CountNodes(root));
         System.out.println("The height of the tree : " + Height(root));
         System.out.println("The leaf of the tree : " + countLeaves(root));
-        System.out.println("Return (true / false) if value exist : " + ValueExist(root));
+        System.out.println("Return (true / false) if value exist : " + ValueExist(root,9));
         System.out.println ("Sum of all nodes in the tree :" + sumValues(root));
-        System.out.println("The binaty tree after values have beee swapped: "+ swapValues(root));
-
-
-
+        System.out.println("The binary tree after values have been swapped: ");
+        swapValues(root);
+        printInOrder(root);
+        System.out.print("\n");
+        System.out.println("Is the tree balanced : "+ isBalanced(root));
 
     }
 }
