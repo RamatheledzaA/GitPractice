@@ -1,5 +1,8 @@
 // ramatheledza Adzisani
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTree {
     public static class BinaryNode{
         int data;
@@ -40,7 +43,100 @@ public class BinaryTree {
         System.out.print(node.data + " , ");
     }
 
-    // create a methode that counts the number of node in the tree
+    // method that display level by level
+    public static void LevelByLevel ( BinaryNode node) {
+        if ( node == null) {
+            return;
+        }
+        Queue<BinaryNode> tree = new LinkedList<>();
+        tree.add(node);
+
+        while (!tree.isEmpty()){
+            BinaryNode current = tree.poll();
+            System.out.print(current.data + " ");
+
+            if (current.left == null){
+                tree.add(current.left);
+            }
+            if (current.right == null){
+                tree.add(current.right);
+            }
+        }
+
+    }
+
+
+    // create a method that counts the number of node in the tree
+    public static int CountNodes(BinaryNode node){
+        if(node == null){
+            return 1 + CountNodes(node.left) + CountNodes(node.right);
+        }
+
+
+        return 0;
+    }
+    // fing the height of the tree
+    public static int Height(BinaryNode node){
+        if (node == null){
+
+            int leftHeight = Height(node.left);
+            int rightHeight= Height(node.right);
+
+            return 1 + Math.max(leftHeight , rightHeight);
+        }
+        return 0;
+    }
+
+
+    // find  a node with no children ( leaf)
+    static int countLeaves(BinaryNode node) {
+        if (node == null)
+            return 0;
+
+        if (node.left == null && node.right == null)
+            return 1;
+
+        return countLeaves(node.left) + countLeaves(node.right);
+    }
+
+
+    // a amethod that returns true or false if a value exits
+    static boolean ValueExist(BinaryNode node, int key){
+        if ( node == null){
+            return false;
+        }
+        if (node.data == key){
+            return true;
+        }
+        return ValueExist(node.left , key) || ValueExist(node.right , key);
+    }
+
+    // method that sum the values in the tree
+    public static int sumValues (BinaryNode node){
+
+        if ( node == null){
+            int leftChild = sumValues(node.left);
+            int rightChild = sumValues(node.right);
+            int sum = leftChild + rightChild;
+            return node.data +  sum;
+    }
+
+    // create a method that swaps the values and print
+    void swapValues (BinaryNode node){
+        if ( node == null){
+            return;
+        }
+
+        BinaryNode temp = node.left;
+        node.left = node.right;
+        node.right = temp ;
+
+        swapValues(node.left);
+        swapValues(node.right);
+        return node;
+    }
+
+
 
 
 
@@ -81,7 +177,21 @@ public class BinaryTree {
         System.out.print("\n");
         System.out.println("----Post Order------");
         printPostOrder(root);
+        System.out.print("\n");
+        System.out.println("--------Level by level------");
+        LevelByLevel(root);
+        System.out.print("\n");
+        System.out.println( "Number of nodes in the tree : " + CountNodes(root));
+        System.out.println("The height of the tree : " + Height(root));
+        System.out.println("The leaf of the tree : " + countLeaves(root));
+        System.out.println("Return (true / false) if value exist : " + ValueExist(root));
+        System.out.println ("Sum of all nodes in the tree :" + sumValues(root));
+        System.out.println("The binaty tree after values have beee swapped: "+ swapValues(root));
+
+
 
 
     }
 }
+
+
