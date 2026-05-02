@@ -48,21 +48,21 @@ public class AVL_Tree {
     }
 
     // case2 : left Rotation
-    Tree_node leftRotation ( Tree_node y){
-        System.out.println("Rotate left on node " + y.data);
-        // x is the right child of y , y is the parent node
-        Tree_node x = y.right;
-        Tree_node T2= x.left ;
+    Tree_node leftRotation ( Tree_node x){
+        System.out.println("Rotate left on node " + x.data);
+
+        Tree_node y = x.right;
+        Tree_node T2= y.left ;
 
         // after rotation y become the right child of node x
-        x.left = y ;
-        y.right = T2 ;
+        y.left = x;
+        x.right = T2 ;
 
         // find the height
         y.height = Math.max (height(y.left), height(y.right)) + 1;
         x.height = Math.max(height (x.left) , height(x.right)) + 1 ;
 
-        return x ;
+        return y ;
     }
 
     // inserting a node in an AVL tree
@@ -80,35 +80,42 @@ public class AVL_Tree {
         } else if (data  > root.data) {
             root.right = insert(root.right , data);
         }else {
-            System.out.println("Duplicate not allowed");
+            System.out.println("Duplicate not allowed" + data);
             return root ; // removers duplicates
         }
-
+        // update height
         root.height = 1 + Math.max(height(root.left ), height(root.right)) ;
         int balanceFactor = getBalance(root) ;
 
+        // check imbalance
+        if (balanceFactor > 1 || balanceFactor < -1) {
+            System.out.println("Imbalance detected at node: " + root.data + " | Balance Factor: " + balanceFactor);
+        }
         // Left Left Case
-        if (balanceFactor > 1 && getBalance(root.left) >= 0) {
+        if (balanceFactor > 1 &&  data < root.left.data) {
+            System.out.println(" LL Case at node " + root.data);
             return rightRotation(root);
         }
 
         // Left Right Case
-        if (balanceFactor > 1 && getBalance(root.left) < 0) {
+        if (balanceFactor > 1 && data > root.left.data) {
+            System.out.println(" LR Case at node " + root.data);
             root.left = leftRotation(root.left);
             return rightRotation(root);
         }
 
         // Right Right Case
-        if (balanceFactor < -1 && getBalance(root.right) <= 0) {
+        if (balanceFactor < -1 && data > root.right.data) {
+            System.out.println(" RR Case at node " + root.data);
             return leftRotation(root);
         }
 
         // Right Left Case
-        if (balanceFactor < -1 && getBalance(root.right) > 0) {
+        if (balanceFactor < -1 && data < root.right.data) {
+            System.out.println("RL Case at node " + root.data);
             root.right = rightRotation(root.right);
             return leftRotation(root);
         }
-
         return root;
 
     }
@@ -132,6 +139,7 @@ public class AVL_Tree {
 
     Tree_node delete(Tree_node root, int data) {
         if (root == null) {
+            System.out.println("Value not found: " + data);
             return root;
         }
 
@@ -140,6 +148,8 @@ public class AVL_Tree {
         } else if (data > root.data) {
             root.right = delete(root.right, data);
         } else {
+            System.out.println("\nDeleted: " + data);
+            // 1 or 0 child
             if ((root.left == null) || (root.right == null)) {
                 Tree_node temp = root.left != null ? root.left : root.right;
 
@@ -158,67 +168,83 @@ public class AVL_Tree {
         if (root == null) {
             return root;
         }
-
+        // update height
         root.height = Math.max(height(root.left), height(root.right)) + 1;
 
-        int balance = getBalance(root);
+        int balanceFactor = getBalance(root);
+        // check imbalance
+        if (balanceFactor > 1 || balanceFactor < -1) {
+            System.out.println("Imbalance detected at node: " + root.data + " | Balance Factor: " + balanceFactor);
+        }
 
         // Left Left Case
-        if (balance > 1 && getBalance(root.left) >= 0) {
+        if (balanceFactor > 1 && getBalance(root.left) >= 0) {
+            System.out.println("LL Case at node " + root.data);
             return rightRotation(root);
         }
 
         // Left Right Case
-        if (balance > 1 && getBalance(root.left) < 0) {
+        if (balanceFactor > 1 && getBalance(root.left) < 0) {
+            System.out.println(" LR Case at node " + root.data);
             root.left = leftRotation(root.left);
             return rightRotation(root);
         }
 
         // Right Right Case
-        if (balance < -1 && getBalance(root.right) <= 0) {
+        if (balanceFactor < -1 && getBalance(root.right) <= 0) {
+            System.out.println("RR Case at node " + root.data);
             return leftRotation(root);
         }
 
         // Right Left Case
-        if (balance < -1 && getBalance(root.right) > 0) {
+        if (balanceFactor < -1 && getBalance(root.right) > 0) {
+            System.out.println("RL Case at node " + root.data);
             root.right = rightRotation(root.right);
             return leftRotation(root);
         }
-
         return root;
     }
 
     // display method
-    void printTree(Tree_node node, int level) {
+    void printTree(Tree_node node, int space) {
         if (node == null) return;
 
-        printTree(node.right, level + 1);
+        space += 5;
 
-        for (int i = 0; i < level; i++) {
-            System.out.print("   ");
+        printTree(node.right, space);
+
+        System.out.println();
+        for (int i = 5; i < space; i++) {
+            System.out.print(" ");
         }
-        System.out.println(node.data + "(h=" + node.height + ")");
+        System.out.print(node.data);
 
-        printTree(node.left, level + 1);
+        printTree(node.left, space);
     }
 
     // main method
     public static void main(String[] args) {
         AVL_Tree tree = new AVL_Tree();
-        int [] letters = {14, 17 , 11 , 7 , 53, 4 , 13 , 12, 6 , 60 , 19 , 16 , 20};
-        for (int letter : letters) {
-            tree.root = tree.insert(tree.root, letter);
+        int[] values = {14, 17, 11, 7, 53, 4, 13, 12, 6, 60, 19, 16, 20};
+        // insert step by step
+        for (int val : values) {
+            tree.root = tree.insert(tree.root, val);
+
+            System.out.println("Tree after inserting " + val + ":");
+            tree.printTree(tree.root, 0);
+            System.out.println("\n---------------------------");
         }
-        tree.inOrderTraversal(tree.root);
 
+        // DELETE STEP-BY-STEP
+        int[] deleteVals = {8, 7, 11, 14, 17};
 
-        System.out.println("\nDeleting node 8 , 7 , 11  , 14 , 17");
-        tree.root = tree.delete(tree.root, 8);
-        tree.root = tree.delete(tree.root, 7);
-        tree.root = tree.delete(tree.root, 11);
-        tree.root = tree.delete(tree.root, 14);
-        tree.root = tree.delete(tree.root, 17);
-        tree.inOrderTraversal(tree.root);
+        for (int val : deleteVals) {
+            tree.root = tree.delete(tree.root, val);
+
+            System.out.println("Tree after deleting " + val + ":");
+            tree.printTree(tree.root, 0);
+            System.out.println("\n---------------------------");
+        }
+
     }
-
 }
